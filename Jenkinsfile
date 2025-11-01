@@ -71,20 +71,17 @@ pipeline {
 
     stage('Terraform Apply') {
       steps {
-        
           withCredentials([file(credentialsId: "${GCP_CREDENTIALS}", variable: 'GCP_KEYFILE')]) {
            
             sh '''
-              
               echo "🚀 Applying Terraform changes (creating GKE)..."
               export GOOGLE_APPLICATION_CREDENTIALS="$GCP_KEYFILE"
               terraform destroy -var-file=terraform.tfvars --auto-approve                
             '''
           }
-        
       }
     }
-
+  }
   post {
     success {
       echo "✅ Terraform successfully created GKE cluster!"
@@ -95,5 +92,6 @@ pipeline {
   }
 
 }
+
 
 
