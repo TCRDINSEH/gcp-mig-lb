@@ -85,19 +85,6 @@ pipeline {
       }
     }
 
-    stage('Verify GKE Cluster') {
-      steps {
-        withCredentials([file(credentialsId: "${GCP_CREDENTIALS}", variable: 'GCP_KEYFILE')]) {
-          sh '''
-            echo "☸️ Verifying GKE cluster..."
-            gcloud auth activate-service-account --key-file=$GCP_KEYFILE
-            gcloud container clusters list --project ${PROJECT_ID}
-          '''
-        }
-      }
-    }
-  }
-
   post {
     success {
       echo "✅ Terraform successfully created GKE cluster!"
@@ -108,3 +95,4 @@ pipeline {
   }
 
 }
+
