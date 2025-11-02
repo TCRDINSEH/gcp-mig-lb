@@ -48,6 +48,7 @@ resource "google_compute_instance_group_manager" "default" {
     instance_template = google_compute_instance_template.default.id
     name              = "primary"
   }
-  base_instance_name = "vm"
+  base_instance_name = "apache-vm"
   target_size        = var.target_size
+
 }
