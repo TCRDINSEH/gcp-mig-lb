@@ -22,6 +22,7 @@ pipeline {
           sh '''
             echo "🔐 Authenticating to GCP..."
             gcloud auth activate-service-account --key-file=$GCP_KEYFILE
+            export GOOGLE_APPLICATION_CREDENTIALS=$GCP_KEYFILE
             gcloud config set project ${PROJECT_ID}
             cd packer
             packer init .
