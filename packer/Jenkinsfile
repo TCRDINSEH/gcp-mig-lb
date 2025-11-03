@@ -3,7 +3,8 @@ pipeline {
 
   environment {
     GCP_CREDENTIALS = "serviceaccountkey"  
-    GIT_CREDENTIALS = "tokenforgcpmiglb"  
+    GIT_CREDENTIALS = "tokenforgcpmiglb" 
+    PROJECT_ID = "applied-pager-476808-j5"
   }
 
   stages {
