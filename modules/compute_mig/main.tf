@@ -61,7 +61,7 @@ resource "google_compute_instance_group_manager" "default" {
   }
 
   version {
-    instance_template = google_compute_instance_template.apache_template.id 
+    instance_template = google_compute_instance_template.default.id
     name              = "primary"
   }
 
@@ -98,5 +98,6 @@ resource "google_compute_autoscaler" "apache_autoscaler" {
     cooldown_period = 60
   }
 }
+
 
 
