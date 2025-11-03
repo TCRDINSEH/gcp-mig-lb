@@ -3,6 +3,7 @@ pipeline {
 
   environment {
     GCP_CREDENTIALS = "serviceaccountkey"  
+    ZONE = "us-central1-c"
     GIT_CREDENTIALS = "tokenforgcpmiglb" 
     PROJECT_ID = "applied-pager-476808-j5"
   }
@@ -27,6 +28,8 @@ pipeline {
             cd packer
             packer init .
             packer build .
+            sleep 2
+            gcloud compute instance-groups managed rolling-action replace apache-mig-mig --zone=$ZONE --max-surge=1
           '''
         }
       }
