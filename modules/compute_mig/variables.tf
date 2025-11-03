@@ -52,5 +52,23 @@ variable "tags" {
 variable "name" {
   description = "Base name for resources"
   type        = string
-  
+}
+
+# Autoscaling settings
+variable "min_replicas" {
+  description = "Minimum number of instances"
+  type        = number
+  default     = 2
+}
+
+variable "max_replicas" {
+  description = "Maximum number of instances"
+  type        = number
+  default     = 10
+}
+
+variable "cpu_target" {
+  description = "Target CPU utilization to trigger scaling (e.g., 0.6 for 60%)"
+  type        = number
+  default     = 0.6
 }
