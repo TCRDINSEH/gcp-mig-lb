@@ -14,9 +14,6 @@ resource "google_compute_instance_template" "default" {
     managed-by-cnrm = "true"
   }
   machine_type = var.instance_machine_type
-  metadata = {
-    startup-script = "#! /bin/bash\n     sudo apt-get update\n     sudo apt-get install apache2 -y\n     sudo a2ensite default-ssl\n     sudo a2enmod ssl\n     vm_hostname=\"$(curl -H \"Metadata-Flavor:Google\" \\\n   http://169.254.169.254/computeMetadata/v1/instance/name)\"\n   sudo echo \"🛰️ You’re connected to: $vm_hostname — part of our microservice galaxy.\" | \\\n   tee /var/www/html/index.html\n   sudo systemctl restart apache2"
-  }
   network_interface {
     access_config {
       network_tier = "PREMIUM"
@@ -52,3 +49,4 @@ resource "google_compute_instance_group_manager" "default" {
   target_size        = var.target_size
 
 }
+
