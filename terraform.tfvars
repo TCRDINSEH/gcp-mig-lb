@@ -7,7 +7,8 @@ proxy_subnetwork_name = "apache-mig-proxy-subnet"
 ssh_source_ip_range   = ["0.0.0.0/0"]
 target_size           = 2
 instance_machine_type = "e2-micro"
-image_family          = "debian-11"
-image_project         = "debian-cloud"
+image_family          = "apache-base"
+image_project         = "applied-pager-476808-j5"
 credentials_file      = ""
 name                  = "apache"
+
