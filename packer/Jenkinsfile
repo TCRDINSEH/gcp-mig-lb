@@ -1,0 +1,42 @@
+pipeline {
+  agent any
+
+  environment {
+    GCP_CREDENTIALS = "serviceaccountkey"  
+    GIT_CREDENTIALS = "tokenforgcpmiglb"  
+  }
+
+  stages {
+       stage('Checkout Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/TCRDINSEH/gcp-mig-lb.git',
+                credentialsId: "${GIT_CREDENTIALS}"
+        
+            }
+        }
+
+    stage('Authenticate to GCP and creating GCP Apache Custom image') {
+      steps {
+        withCredentials([file(credentialsId: "${GCP_CREDENTIALS}", variable: 'GCP_KEYFILE')]) {
+          sh '''
+            echo "🔐 Authenticating to GCP..."
+            gcloud auth activate-service-account --key-file=$GCP_KEYFILE
+            gcloud config set project ${PROJECT_ID}
+            cd packer
+            packer build apache.json
+          '''
+        }
+      }
+    }
+
+  }
+  post {
+    success {
+      echo "✅ Packer successfully created custom Apache image!"
+    }
+    failure {
+      echo "❌ Packer pipeline failed — check logs."
+    }
+  }
+}
+
