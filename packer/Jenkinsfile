@@ -24,6 +24,7 @@ pipeline {
             gcloud auth activate-service-account --key-file=$GCP_KEYFILE
             gcloud config set project ${PROJECT_ID}
             cd packer
+            packer init
             packer build apache.json
           '''
         }
