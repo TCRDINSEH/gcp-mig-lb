@@ -1,6 +1,12 @@
 pipeline {
   agent any
-
+ parameters {
+    choice(
+      name: 'ACTION',
+      choices: ['apply', 'destroy'],
+      description: 'Choose Terraform action to perform (apply or destroy)'
+    )
+  }
   environment {
     PROJECT_ID = "applied-pager-476808-j5"
     REGION = "us-central1"
@@ -92,6 +98,7 @@ pipeline {
   }
 
 }
+
 
 
 
