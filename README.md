@@ -1,1 +1,1 @@
-this repo is for creating gcp-mig vpc and loadbalancer
+this repo is for creating gcp-mig vpc and loadbalance
